@@ -15,13 +15,18 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 function ForumAnswer(props) {
-    console.log(`ForumAnswer props = ${props.answer.body}`);
+  //  console.log(`ForumAnswer props = ${props.answer.body}`);
     return (
         <div className="panel panel-default">
             <div className="panel-body">
               {props.answer.body}
               <div className="pull-right">
-                <small><button className="link-button" onClick={this._markCorrect}>Mark as correct</button></small>
+                <small>
+                <button 
+                    className="link-button" 
+                    onClick={props.onMarkCorrect(props.id)}>Mark as correct
+                </button>
+                </small>
               </div>
             </div>
         </div>
@@ -30,8 +35,8 @@ function ForumAnswer(props) {
 
 
 //
-ForumAnswer.prototype._markCorrect = () => {
-    this.props.onMarkCorrect(this.props.id);
+ForumAnswer.prototype._markCorrect = (props) => {
+    props.onMarkCorrect(props.id);
 };
 
 ForumAnswer.propTypes = {

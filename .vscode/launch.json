@@ -20,5 +20,18 @@
             "port":9222,    
             "webRoot": "${workspaceFolder}"
         },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome in debug mode",
+            "url": "http://localhost:3000/",
+            "sourceMaps": true,
+            "runtimeArgs": [
+                "--remote-debugging-port=9222"
+            ],
+            "port":9222,    
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "Echo Environment Variables"
+        },
     ]
 }

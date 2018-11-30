@@ -1,0 +1,11 @@
+{
+    "label": "Echo Environment Variables",
+    "command":"echo",
+    "args":[
+        "${env:USERNAME}",
+        "workspaceFolder = ${workspaceFolder}"
+    ],
+    "type":"shell",
+    "version": "2.0.0",
+    "problemMatchers": []
+}

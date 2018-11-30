@@ -48,8 +48,8 @@ class ForumAddAnswerBox extends React.Component {
          // logic to be used upon clicking 'add' button. 
          // this function signature expects string 'answer text' 
          // passed in as property from JSX element above 
-         //    <ForumAddAnswerBox {onAddAnswer(HTMLtextAreaElemnt.target.value)}
-        this.props.onAddAnswer(this.state.answerText); 
+         //    <ForumAddAnswerBox onAddAnswer={this._onAddAnswer} />
+        this.props.dispatchAddAnswer(this.state.answerText); 
     }
 
     _onChange = (event) => {

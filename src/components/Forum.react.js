@@ -27,7 +27,7 @@ class Forum extends Component {
     //public methods
     componentDidMount() {
         // setting state here will cause re-rendering
-        console.log('componentDidMount Called');
+        console.log('Component mounted');
         this.setState(this._jgetState(2));
     }
     componentWillUnmount() {
@@ -46,7 +46,7 @@ class Forum extends Component {
                 <ForumAnswers allAnswers={this.state.allAnswers} />
                 <hr />
                 <h4>Add an answer</h4>
-                <ForumAddAnswerBox onAddAnswer={this._onAddAnswer} />
+                <ForumAddAnswerBox dispatchAddAnswer={this._AddAnswer} />
             </div>
         </div>
         );

@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Forum from './components/Forum.react'; 
 
 import ForumDispatcher from './dispatcher/ForumDispatcher';
-import EventEmitter from './eventemitter';
+// import EventEmitter from './eventemitter';
 
 
 
@@ -16,6 +16,8 @@ ReactDOM.render(<Forum />,  document.getElementById('root'));
 
 // SCRATCH
 /* this is just playing around with EventEmitter and ForumDispatcher Objects */
+
+/*
 var myEmitter = new EventEmitter();
 myEmitter.on("STARTED", function() {
     console.log('Listener 1 - started the app.');
@@ -26,12 +28,15 @@ myEmitter.on("STARTED", function() {
 
 // this triggers the functions registered by 'on' to run
 myEmitter.emit('STARTED');
+*/
 
+// this is one of the functions that will get called
+// whenever ForumDispatcher.dispatch() is called.
 ForumDispatcher.register(function(action) {
     if (action.actionType === "FORUM_ANSWER_MARKED_CORRECT") {
-        console.log(`actionType = ${action.actionType}, answer id = ${action.id}` );
+        console.log(`actionType = ${action.actionType}, action.id = ${action.id}` );
     } else if (action.actionType === "FORUM_ANSWER_ADDED") {
-        console.log(`actionType = ${action.actionType}, answer id = ${action.newAnswer}` );
+        console.log(`actionType = ${action.actionType}, action.newAnswer = ${action.newAnswer}` );
     } else {
         console.log('actionType not found');
     }

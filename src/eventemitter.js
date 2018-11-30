@@ -34,4 +34,3 @@ EventEmitter.prototype.removeListener = function( type, listener) {
 export default EventEmitter;
 
 
-

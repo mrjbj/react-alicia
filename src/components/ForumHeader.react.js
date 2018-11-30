@@ -3,7 +3,6 @@ import React from 'react';
 //import styles from 'bootstrap'
 
 function ForumHeader(props) {
-    console.log(props.allAnswers);
     return (
         <nav className='navbar navbar-default'>
             <div className='container-fluid'>
