@@ -7,11 +7,18 @@
         {
             "type": "chrome",
             "request": "launch",
-            "runtimeExecutable": "/snap/bin/chromium",
+            "runtimeExecutable": "/snap/bin/chromium --remote-debugging-port=9222",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3000",
+            "url": "http://localhost:3000/",
             "port":9222,
             "webRoot": "${workspaceFolder}"
-        }
+        },{
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attache to chrome and debug",
+            "url": "http://localhost:3000/",
+            "port":9222,    
+            "webRoot": "${workspaceFolder}"
+        },
     ]
 }
