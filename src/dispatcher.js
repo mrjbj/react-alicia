@@ -25,8 +25,8 @@ Dispatcher.prototype.register = function(callback) {
 
 //invoke all registered functions regardless of action type
 Dispatcher.prototype.dispatch = function(action) {
-    for (var func in this._callbacks) {
-        this._callbacks[func](action);  //invoke each method passing in action object
+    for (var id in this._callbacks) {
+        this._callbacks[id](action);  //invoke each method passing in action object
     }
 }
 

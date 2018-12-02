@@ -6,6 +6,7 @@ import ForumQuestion from './ForumQuestion.react';
 import ForumAnswers from './ForumAnswers.react';
 import ForumAddAnswerBox from './ForumAddAnswerBox.react';
 import ForumDispatcher from '../dispatcher/ForumDispatcher';
+import ForumStore from '../stores/ForumStore';
 
 //this is a container component that contains state
 // therefore it's a class with constructor that initializes it.
@@ -21,7 +22,7 @@ import ForumDispatcher from '../dispatcher/ForumDispatcher';
 class Forum extends Component {
     constructor(props) {
         super(props);  // always do this.
-        this.state = this._jgetState();
+        this.state = {allAnswers: this._jgetState()};
     }
 
     //public methods
@@ -46,14 +47,14 @@ class Forum extends Component {
                 <ForumAnswers allAnswers={this.state.allAnswers} />
                 <hr />
                 <h4>Add an answer</h4>
-                <ForumAddAnswerBox dispatchAddAnswer={this._AddAnswer} />
+                <ForumAddAnswerBox dispatchNewAnswer={this._AddAnswer} />
             </div>
         </div>
         );
     }
 
     // PRIVATE methods
-    _onAddAnswer(pAnswerText) {
+    _AddAnswer(pAnswerText) {
         // function that gets called by ForumAddAnswerBox component
         // whenever 'add' button is pressed.
         // that function expects to receive answser text passed into 
@@ -76,42 +77,7 @@ class Forum extends Component {
         // since each objectPropertyName is like a unique integer, we can iterate
         // across a for-in loop while storing a unique id string in the iterator 
         // each time.  (jKey is used in the <FormAnswers /> implementation here.)
-
-        if (pMethod) {
-            return {
-                allAnswers: {
-                    "1": {
-                        body: "Updated 1",
-                        correct: false
-                    },
-                    "2": {
-                        body: "Updated 2", 
-                        correct: false
-                    },
-                    "3": {
-                        body: "Updated 3",
-                        correct: false
-                    }
-                }
-            }
-        }  else {
-            return {
-                allAnswers: {
-                    "1": {
-                        body: "Isn't that about time travel?",
-                        correct: false
-                    },
-                    "2": {
-                        body: "React and Flux are a tool and methodology for buildiong front end web applications.", 
-                        correct: false
-                    },
-                    "3": {
-                        body: "React is a synonym for 'respond'",
-                        correct: false
-                    }
-                }
-            }
-        }
+        return ForumStore.getAnswers();
     }
 }
 

@@ -27,7 +27,7 @@ class ForumAnswers extends React.Component {
                                             key={jKey} 
                                             id={jKey} 
                                             answer={this.props.allAnswers[jKey]} 
-                                            onMarkCorrect={this._onMarkCorrect}
+                                            dispatchMarkCorrectAction={this._onMarkCorrect}
                                             />);
         }
     }

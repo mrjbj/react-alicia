@@ -14,8 +14,13 @@
 import React from 'react';
 import PropTypes from "prop-types";
 
-function ForumAnswer(props) {
-  //  console.log(`ForumAnswer props = ${props.answer.body}`);
+const ForumAnswer = (props) => {
+    //  event handler for onClick event of <button/>.
+    //  just assign the function name in <button onClick={}/>. 
+    //  the pEvent object will be passed in from DOM when button clicked at runtime.
+    const _markCorrect = (pEvent) => {
+        props.dispatchMarkCorrectAction(props.id);
+    };
     return (
         <div className="panel panel-default">
             <div className="panel-body">
@@ -24,7 +29,7 @@ function ForumAnswer(props) {
                 <small>
                 <button 
                     className="link-button" 
-                    onClick={props.onMarkCorrect(props.id)}>Mark as correct
+                    onClick={_markCorrect}>Mark as correct
                 </button>
                 </small>
               </div>
@@ -32,17 +37,11 @@ function ForumAnswer(props) {
         </div>
     );
 }
-
-
-//
-ForumAnswer.prototype._markCorrect = (props) => {
-    props.onMarkCorrect(props.id);
-};
-
+//  Properties
 ForumAnswer.propTypes = {
     id: PropTypes.string.isRequired,
     answer: PropTypes.object,
-    onMarkCorrect: PropTypes.func.isRequired,
+    dispatchMarkCorrectAction: PropTypes.func.isRequired,
 };
 
 export default ForumAnswer;

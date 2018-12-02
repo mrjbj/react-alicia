@@ -49,12 +49,12 @@ class ForumAddAnswerBox extends React.Component {
          // this function signature expects string 'answer text' 
          // passed in as property from JSX element above 
          //    <ForumAddAnswerBox onAddAnswer={this._onAddAnswer} />
-        this.props.dispatchAddAnswer(this.state.answerText); 
+        this.props.dispatchNewAnswer(this.state.answerText); 
     }
 
     _onChange = (event) => {
         // this is essentially manual data-binding from HTML to JavaScript state object. 
-        console.log(`change detected in <textarea /> element. This / event equals: `, this, event);
+        // console.log(`change detected in <textarea /> element. This / event equals: `, this, event);
         this.setState({
             answerText: event.target.value
         });
