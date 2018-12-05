@@ -4,19 +4,16 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Forum from './components/Forum.react'; 
 
-// import EventEmitter from './eventemitter';
 
-
-
-// var jElement = React.createElement('h1', {className: 'greeting'}, 'Hello World');
 ReactDOM.render(<Forum />,  document.getElementById('root'));
 
 
 
 // SCRATCH
-/* this is just playing around with EventEmitter and ForumDispatcher Objects */
+// this is just playing around with EventEmitter and ForumDispatcher Objects 
 
 /*
+import EventEmitter from './eventemitter';
 var myEmitter = new EventEmitter();
 myEmitter.on("STARTED", function() {
     console.log('Listener 1 - started the app.');

@@ -13,6 +13,8 @@
 
 import React from 'react';
 import PropTypes from "prop-types";
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const ForumAnswer = (props) => {
     //  event handler for onClick event of <button/>.
@@ -21,18 +23,24 @@ const ForumAnswer = (props) => {
     const _markCorrect = (pEvent) => {
         props.dispatchMarkCorrectAction(props.id);
     };
+
+    var answer = props.answer;
+    var markAnswer;
+    if (!answer.correct) {
+        markAnswer = 
+        <div className="pull-right">
+            <small><button className="link-button" onClick={_markCorrect}>Mark as Correct</button></small>
+        </div>
+    }
+
+    var classNames = "panel-body"
+    if (answer.correct) {classNames += " bg-success"};
+
     return (
         <div className="panel panel-default">
-            <div className="panel-body">
+            <div className= { classNames }>
               {props.answer.body}
-              <div className="pull-right">
-                <small>
-                <button 
-                    className="link-button" 
-                    onClick={_markCorrect}>Mark as correct
-                </button>
-                </small>
-              </div>
+              { markAnswer }
             </div>
         </div>
     );

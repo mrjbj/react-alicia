@@ -9,6 +9,7 @@
 import EventEmitter from "../eventemitter";
 import ForumDispatcher from "../dispatcher/ForumDispatcher";
 
+// initial data for store, set by <Forum /> constructore
 var answerData = {
     "1": {
         body: "Isn't this about time travel?",
@@ -24,7 +25,18 @@ var answerData = {
     }
 };
 
+// instantiate new EventEmitter for Store
 var ForumStore = new EventEmitter();
+
+// calls event emiter when store's data changes... 
+ForumStore.emitChange = function () {
+    this.emit('change');
+}
+
+// register listener function that subscribes to store's data changes
+ForumStore.addChangeListener = function(listener) {
+    this.on('change', listener);
+}
 
 ForumStore.getAnswers = function() {
     return answerData;
@@ -36,6 +48,10 @@ ForumStore.addAnswer = function(newAnswer) {
         body: newAnswer, 
         correct: false
     };
+    var oldData = answerData;
+    answerData = Object.assign({}, answerData);  // return new object, don't mutate
+    console.log(`Does oldData === answerData?  ${oldData === answerData}`);
+    this.emitChange();
 }
 
 // set all correct to false, then set id to true    
@@ -44,6 +60,7 @@ ForumStore.markAsCorrect = function(id) {
         answerData[index].correct = false;
     }
     answerData[id].correct = true;
+    this.emitChange();
 }
 
 

@@ -12,7 +12,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 import ForumAnswer from './ForumAnswer.react';
-import ForumDispatcher from '../dispatcher/ForumDispatcher';  // a singleton import
+import ForumActions from '../actions/ForumActions';
 
 class ForumAnswers extends React.Component {
     _answers = [];  // is this the same as ForumAnswers.prototype._answers = []?
@@ -41,10 +41,7 @@ class ForumAnswers extends React.Component {
 
     // this function gets passed down as a property into each ForumAnswer component.
     _onMarkCorrect(id) {
-        ForumDispatcher.dispatch({
-            actionType: 'FORUM_ANSWER_MARKED_CORRECT',
-            id: id
-        });
+        ForumActions.markAnswerCorrect(id);
     }
 }
 

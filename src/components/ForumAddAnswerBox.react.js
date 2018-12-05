@@ -2,13 +2,13 @@
 // stateful component to allow adding a new answer to ForumAnswers
 
 import React from 'react';
-// import Forum from './Forum.react';
-
+import 'bootstrap/dist/css/bootstrap.css';
 
 class ForumAddAnswerBox extends React.Component {
     constructor(props) {
         super(props);
-       // this._onChange = this._onChange.bind(this);
+        this._onChange = this._onChange.bind(this);
+        this._addAnswer = this._addAnswer.bind(this);
         this.state = {
             answerText: ""
         }
@@ -43,7 +43,7 @@ class ForumAddAnswerBox extends React.Component {
     }
 
     // private methods
-    _addAnswer = () => {
+    _addAnswer () {
          // onAddAnswer is function passed in by user to define 
          // logic to be used upon clicking 'add' button. 
          // this function signature expects string 'answer text' 
@@ -52,12 +52,10 @@ class ForumAddAnswerBox extends React.Component {
         this.props.dispatchNewAnswer(this.state.answerText); 
     }
 
-    _onChange = (event) => {
+    _onChange  (event) {
         // this is essentially manual data-binding from HTML to JavaScript state object. 
         // console.log(`change detected in <textarea /> element. This / event equals: `, this, event);
-        this.setState({
-            answerText: event.target.value
-        });
+        this.setState( Object.assign({}, {answerText: event.target.value}));
     }
 }
 

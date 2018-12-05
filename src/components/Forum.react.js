@@ -5,8 +5,8 @@ import ForumHeader from './ForumHeader.react';
 import ForumQuestion from './ForumQuestion.react';
 import ForumAnswers from './ForumAnswers.react';
 import ForumAddAnswerBox from './ForumAddAnswerBox.react';
-import ForumDispatcher from '../dispatcher/ForumDispatcher';
 import ForumStore from '../stores/ForumStore';
+import ForumActions from '../actions/ForumActions';
 
 //this is a container component that contains state
 // therefore it's a class with constructor that initializes it.
@@ -23,17 +23,26 @@ class Forum extends Component {
     constructor(props) {
         super(props);  // always do this.
         this.state = {allAnswers: this._jgetState()};
+
+        // bind returns a bound function, so we are setting _onChange to always
+        // bind its this context to Forum.  If not, will have issue when 
+        // _onChange is called from event emitter as regular function invocation.
+        this._onChange = this._onChange.bind(this);
     }
 
     //public methods
     componentDidMount() {
         // setting state here will cause re-rendering
         console.log('Component mounted');
-        this.setState(this._jgetState(2));
+        ForumStore.addChangeListener(this._onChange);
+    }
+    componentDidUpdate(prevProps, prevState) {
+        console.log("this.state updated.");
+        console.log('old state, new state: ', prevState, this.state );
     }
     componentWillUnmount() {
         // called just before component is destroyed
-        console.log('componentWillUnmount called');
+        ForumStore.removeListener(this._onChange);
     }
     render() {
         return (
@@ -63,10 +72,7 @@ class Forum extends Component {
         // this function is a property of <ForumAddAnswerBox /> 
         // and is called from the line within it like so:
         //    this.props.onAddAnswer(this.state.answerText), where 'this' resolves to <ForumAddAnswerBox />
-        ForumDispatcher.dispatch({
-            actionType: 'FORUM_ANSWER_ADDED',
-            newAnswer: pAnswerText
-        });
+        ForumActions.addNewAnswer(pAnswerText);
     }
     _jgetState(pMethod) {
         // private method called from constructor to set changeable state of component.
@@ -79,6 +85,12 @@ class Forum extends Component {
         // each time.  (jKey is used in the <FormAnswers /> implementation here.)
         return ForumStore.getAnswers();
     }
+    // listener function that subscribes to ForumStore.emitChange via ForumStore.addChangeListener
+    // it's registered in the componentDidMount lifecycle method.
+    // just get the data again and re-render yourself
+    _onChange() {
+        this.setState({ allAnswers: ForumStore.getAnswers() });
+ }
 }
 
 export default Forum;
